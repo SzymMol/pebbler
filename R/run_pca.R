@@ -1,22 +1,39 @@
 #' Run PCA
 #'
-#' compute PCA results
+#' Compute PCA results.
+#' The procedure utilizes \code{\link{prcomp}}.
 #'
 #' @export
+#' @param x_active data frame with active variables observations
+#' @param x_supp data frame with supplementary variables observations
+#' @param y_group data frame with the grouping variable labels
+#' @param flip_cols vector of logical values indicating whether the sign of the
+#'  respective PC vector needs to be flipped
+#' @param idv dataset name (if multiple datasets are analyzed)
 #' @examples
-#' run_pca(pca_result)
+#' data('witow', package = 'pebbler')
+#' dat <- witow
+#' roles <- list(active = c('a', 'b', 'c', 'mass'),
+#'               group = 'lithotype',
+#'               supp = 'hgt_min')
+#' run_pca(x_active = scale(dat[roles$active]),
+#'         x_supp = dat[roles$supp],
+#'         y_group = dat[roles$group],
+#'         flip_cols = rep(FALSE, length(roles$active)))
 #' @importFrom shiny validate
 #' @importFrom shiny need
+#' @importFrom stats prcomp
 
-run_pca <- function(x_active, x_supp, y_group, flip_cols, roles, idv = NULL) {
-  # validate(need(ncol(x_active) >= 2, "Need >=2 numeric active variables for PCA."))
+run_pca <- function(x_active, x_supp, y_group, flip_cols, idv = NULL) {
+  validate(need(ncol(x_active) >= 2, "Need >=2 numeric active variables for PCA."))
   # validate(need(nrow(x_active) >= 2, "Need >=2 complete observations for PCA."))
 
   # decomposition X = U@S@V.T
   fit <- prcomp(x_active, center = TRUE, scale. = FALSE)
-  s <- as.data.frame(fit$x) # scores U@S
-  ev <- as.data.frame(fit$rotation) # eigenvectors in columns V
-
+  s <- as.data.frame(fit$x) # scores U@S (F in Graffelman, 2003)
+  ev <- as.data.frame(fit$rotation) # eigenvectors in columns V (G in Graffelman, 2003)
+  # print(x_active[1, ]-colMeans(x_active))
+  # print((as.matrix(s)%*%t(ev))[1, ])
   # flip eigenvectors
   for (j in 1:dim(ev)[2]){
     if (ev[which.max(abs(ev[, j])), j] < 0) {
@@ -39,6 +56,16 @@ run_pca <- function(x_active, x_supp, y_group, flip_cols, roles, idv = NULL) {
 
   # calculate supplementary vectors
   supp <- project_supp_vectors2(s, x_supp)
+  # the above is the same as
+  # supp <- project_supp_vectors2(s_std, x_supp)
+  # and the same as (formula from Graffelman, 2003)
+  # f <- as.matrix(s_std)
+  # print(t(f) %*% scale(x_supp) / (nrow(f) - 1))
+  # print(solve(t(f)%*%f)%*%t(f)%*%as.matrix(scale(x_supp)))
+  # or
+  # f <- as.matrix(s)
+  # print(solve(t(f)%*%f)%*%t(f)%*%as.matrix(scale(x_supp))*fit$sdev)
+
   supp <- cbind(original_var = rownames(supp), supp)
   rownames(supp) <- NULL
 

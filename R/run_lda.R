@@ -1,17 +1,33 @@
 #' Run LDA
 #'
-#' compute LDA results
+#' Compute LDA results.
+#' The procedure utilizes \code{\link[MASS]{lda}} from \code{MASS} package.
 #'
 #' @export
+#' @param x_active data frame with active variables observations
+#' @param x_supp data frame with supplementary variables observations
+#' @param y_group data frame with the grouping variable labels
+#' @param flip_cols vector of logical values indicating whether the sign of the
+#'  respective LD column needs to be flipped
+#' @param idv dataset name (if multiple datasets are analyzed)
 #' @examples
-#' run_lda(pca_result)
+#' data('witow', package = 'pebbler')
+#' dat <- witow
+#' roles <- list(active = c('a', 'b', 'c', 'mass'),
+#'               group = 'lithotype',
+#'               supp = 'hgt_min')
+#' run_lda(x_active = scale(dat[roles$active]),
+#'         x_supp = dat[roles$supp],
+#'         y_group = dat[roles$group],
+#'         flip_cols = rep(FALSE, length(roles$active)))
 #' @importFrom shiny validate
 #' @importFrom shiny need
 #' @importFrom MASS lda
+#' @importFrom stats predict
 
 
-run_lda <- function(x_active, x_supp, y_group, flip_cols, roles, idv = NULL) {
-  validate(need(ncol(x_active) >= 1, "Need >=1 numeric active variable for LDA."))
+run_lda <- function(x_active, x_supp, y_group, flip_cols, idv = NULL) {
+  validate(need(ncol(x_active) >= 1, "Need >=1 numeric active variables for LDA."))
   validate(need(!is.null(y_group) && ncol(y_group) > 0, "Choose a grouping variable for LDA."))
 
   # gf <- droplevels(as.factor(y_group))
@@ -27,6 +43,10 @@ run_lda <- function(x_active, x_supp, y_group, flip_cols, roles, idv = NULL) {
   s <- as.data.frame(px$x) # scores
   sc <- as.data.frame(fit$scaling) # unstandardized discriminant coefficients
 
+  # print(sc)
+  # print(s[1, ])
+  # print((scale(as.matrix(x_active), center=colMeans(fit$means), scale=FALSE) %*% fit$scaling)[1, ])
+  # print((as.matrix(s)%*%t(sc))[1, ])
 
   # # decomposition X = U@S@V.T
   # fit <- prcomp(x_active, center = TRUE, scale. = FALSE)
@@ -56,7 +76,13 @@ run_lda <- function(x_active, x_supp, y_group, flip_cols, roles, idv = NULL) {
 
   # calculate supplementary vectors
   supp <- project_supp_vectors2(s, x_supp)
+  # print(supp)
+  # the above is not the same as (formula from Graffelman, 2003)
+  # the problem lies in the definitions used: regression or correlation coefficients
+  # f <- as.matrix(s)
+  # print(solve(t(f)%*%f)%*%t(f)%*%as.matrix(scale(x_supp)))
   supp <- add_var_names(supp)
+
   # supp <- cbind(original_var = rownames(supp), supp)
   # rownames(supp) <- NULL
 

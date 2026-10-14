@@ -10,5 +10,7 @@ run_pebbler()
 Run pebbler ShinyApp
 }
 \examples{
-run_pebbler()
+if (interactive()) {
+  run_pebbler()
+}
 }

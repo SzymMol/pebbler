@@ -1,17 +1,29 @@
 Package: pebbler
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Multivariate Statistics in Geoscience Made Easy
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
+      "Szymon", "Mol",
+      email = "szymon.mol@doctoral.uj.edu.pl",
+      role = c("aut", "cre"), 
+      comment = c(ORCID = "0009-0001-3618-9541")
+    ), 
+    person(
+      "Krzysztof", "Ninard",
+      email = "krzysztof.ninard@uj.edu.pl",
+      role = c("aut"), 
+      comment = c(ORCID = "0000-0002-7260-5979")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: 'pebbler' is a graphical R/Shiny workflow to perform multivariate 
+    statistical analysis. It is optimized for geoscience applications, e.g., 
+    sediment grains morphometry, geochemistry, particle size distributions, etc.
+    'pebbler' supports compositional data preprocessing, 
+    computation of PCA and LDA with supplementary variables, 
+    biplot and scree plot visualization,
+    interactive measurements of angles and distances on a biplot.
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Config/roxygen2/version: 8.0.0
@@ -19,7 +31,16 @@ Imports:
     dplyr (>= 1.2.1),
     DT (>= 0.34.0),
     ggplot2 (>= 4.0.3),
-    MASS (>= 7.3.65),
+    ggrepel (>= 0.9.8),
+    grid (>= 4.6.0),
+    MASS (>= 7.3.66),
+    plotly (>= 4.12.1),
     readr (>= 2.2.0),
-    shiny (>= 1.13.0),
+    rlang (>= 1.3.0),
+    scales (>= 1.4.0),
+    shiny (>= 1.14.0),
     tidyr (>= 1.3.2)
+Depends: 
+    R (>= 3.5)
+URL: https://github.com/SzymMol/pebbler
+BugReports: https://github.com/SzymMol/pebbler/issues

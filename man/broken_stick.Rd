@@ -7,7 +7,7 @@
 broken_stick(p)
 }
 \arguments{
-\item{p}{integer}
+\item{p}{positive integer}
 }
 \value{
 vector of output values in the "broken stick" model
@@ -16,5 +16,5 @@ vector of output values in the "broken stick" model
 Calculate "broken stick" model values
 }
 \examples{
-broken_stick(5)
+pebbler:::broken_stick(5)
 }

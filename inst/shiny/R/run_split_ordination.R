@@ -8,8 +8,8 @@ run_split_ordination <- function(dat, id_col, method, flip_axs_vals, roles) {
         x_supp = dat_split[roles$supp],
         y_group = dat_split[roles$group],
         idv = idv,
-        flip_cols = flip_axs_vals[idv, ],
-        roles = roles
+        flip_cols = flip_axs_vals[idv, ]
+        # roles = roles
       )
     }
     else {
@@ -18,8 +18,8 @@ run_split_ordination <- function(dat, id_col, method, flip_axs_vals, roles) {
         x_supp = dat_split[roles$supp],
         y_group = dat_split[roles$group],
         idv = idv,
-        flip_cols = flip_axs_vals[idv, ],
-        roles = roles
+        flip_cols = flip_axs_vals[idv, ]
+        # roles = roles
       )
     }
   })

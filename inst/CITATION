@@ -1,0 +1,9 @@
+bibentry(
+  bibtype = "InCollection",
+  title = "Multivariate Data Analysis in Planetary Geology Using \"Pebbler\" App",
+  booktitle = "Planetary Science Conference 2026. Friday, 23 October 2026 - Saturday, 24 October 2026 Kraków, Poland. Book of Abstracts",
+  author = c(person("Szymon", "Mol"), person("Krzysztof", "Ninard")),
+  year = "2026",
+  pages = "16",
+  publisher = "Jagiellonian University"
+)

@@ -2,13 +2,35 @@
 % Please edit documentation in R/plot_pca_scree.R
 \name{plot_pca_scree}
 \alias{plot_pca_scree}
-\title{Plot pca scree plot}
+\title{Plot PCA scree}
 \usage{
 plot_pca_scree(pca_result, show_bkn_stck, legend_title = "ID")
 }
+\arguments{
+\item{pca_result}{the output of \code{\link{run_pca}}}
+
+\item{show_bkn_stck}{logical parameter; if \code{TRUE} broken stick line is shown, otherwise it is hidden}
+
+\item{legend_title}{legend title (if \code{pca_result} contains at least two datasets)}
+}
+\value{
+ggplot object
+}
 \description{
-Plot pca scree plot
+Plot PCA scree plot.
+Scree plot is a barplot which displays PCs in the x-axis
+and percent of explained variance in the y-axis.
 }
 \examples{
-plot_pca_scree(pca_result)
+data('witow', package = 'pebbler')
+dat <- witow
+roles <- list(active = c('a', 'b', 'c', 'mass'),
+              group = 'lithotype',
+              supp = 'hgt_min')
+pca_result <- run_pca(x_active = scale(dat[roles$active]),
+                      x_supp = dat[roles$supp],
+                      y_group = dat[roles$group],
+                      flip_cols = rep(FALSE, length(roles$active))
+                      )
+plot_pca_scree(pca_result, TRUE)
 }

@@ -1,8 +1,8 @@
 # pebbler: multivariate pebble morphometry made easy
 
-required_packages <- c("shiny", "ggplot2", "ggrepel", "dplyr", "readr", "DT", "MASS", "scales", "tidyr", "plotly")
-new_packages <- required_packages[!(required_packages %in% installed.packages()[, "Package"])]
-if (length(new_packages)) install.packages(new_packages)
+# required_packages <- c("shiny", "ggplot2", "ggrepel", "dplyr", "readr", "DT", "MASS", "scales", "tidyr", "plotly")
+# new_packages <- required_packages[!(required_packages %in% installed.packages()[, "Package"])]
+# if (length(new_packages)) install.packages(new_packages)
 
 library(shiny)
 library(ggplot2)
@@ -15,11 +15,12 @@ library(scales)
 library(tidyr)
 library(plotly)
 library(grid)
+library(pebbler)
 
-source("../../R/broken_stick.R")
-source("../../R/plot_pca_scree.R")
-source("../../R/run_pca.R")
-source("../../R/run_lda.R")
+# source("../../R/broken_stick.R")
+# source("../../R/plot_pca_scree.R")
+# source("../../R/run_pca.R")
+# source("../../R/run_lda.R")
 
 
 # `%||%` <- function(x, y) if (is.null(x)) y else x

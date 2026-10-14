@@ -43,11 +43,11 @@ preprocessing_server <- function(id, rv) {
           rv$data <- rv$filtered_data
           return()
         }
-        if (length(input$prep_cols_act) > 0 && !isTRUE(input$do_log_act) && !isTRUE(input$do_scale_act)) {
+        if (length(input$prep_cols_act) > 0 && !isTRUE(input$do_log_act) && !isTRUE(input$do_scale_act) && !isTRUE(input$do_clr_act)) {
           showNotification("Select at least one preprocessing option for active columns.", type = "warning")
           return()
         }
-        if (length(input$prep_cols_supp) > 0 && !isTRUE(input$do_log_supp) && !isTRUE(input$do_scale_supp)) {
+        if (length(input$prep_cols_supp) > 0 && !isTRUE(input$do_log_supp) && !isTRUE(input$do_scale_supp) && !isTRUE(input$do_clr_supp)) {
           showNotification("Select at least one preprocessing option for passive/supplementary columns.", type = "warning")
           return()
         }
@@ -55,6 +55,9 @@ preprocessing_server <- function(id, rv) {
         dat <- rv$filtered_data # preprocessing starts with output data from previous tab
 
         # active columns preprocessing
+        if (isTRUE(input$do_clr_act)) {
+          dat <- apply_clr_preprocessing(dat, input$prep_cols_act)
+        }
         if (isTRUE(input$do_log_act)) {
           dat <- apply_log_preprocessing(dat, input$prep_cols_act)
         }
@@ -63,6 +66,9 @@ preprocessing_server <- function(id, rv) {
         }
 
         # passive columns preprocessing
+        if (isTRUE(input$do_clr_supp)) {
+          dat <- apply_clr_preprocessing(dat, input$prep_cols_supp)
+        }
         if (isTRUE(input$do_log_supp)) {
           dat <- apply_log_preprocessing(dat, input$prep_cols_supp)
         }
@@ -75,14 +81,31 @@ preprocessing_server <- function(id, rv) {
         rv$prep_log <- list(list(
           time = as.character(Sys.time()),
           cols_act = input$prep_cols_act,
+          clr_act = isTRUE(input$do_clr_act),
           log10_act = isTRUE(input$do_log_act),
           zscore_act = isTRUE(input$do_scale_act),
           cols_supp = input$prep_cols_supp,
+          clr_supp = isTRUE(input$do_clr_supp),
           log10_supp = isTRUE(input$do_log_supp),
           zscore_supp = isTRUE(input$do_scale_supp)
         ))
         showNotification("Preprocessing applied.", type = "message")
       })
+
+      apply_clr_preprocessing <- function(dat, cols) {
+        # apply centred logratio (clr) to columns in dat
+        if (any(dat[cols] <= 0)) {
+          showNotification(paste("Skipping clr for selected columns (<=0 values)."), type = "warning")
+        }
+        else {
+          result <- apply(dat[cols], 1, function(row) {
+            gmean <- exp(mean(log(row)))
+            return(log(row/gmean))
+          })
+          dat[cols] <- t(result)
+        }
+        return(dat)
+      }
 
       apply_log_preprocessing <- function(dat, cols) {
         # apply log10 to columns in dat
@@ -120,8 +143,10 @@ preprocessing_server <- function(id, rv) {
         # rv$data <- rv$filtered_data
         # rv$id_col <- detect_id_col(names(rv$raw_data))
         rv$prep_log <- list()
+        updateCheckboxInput(session, "do_clr_act", value = FALSE)
         updateCheckboxInput(session, "do_log_act", value = FALSE)
         updateCheckboxInput(session, "do_scale_act", value = FALSE)
+        updateCheckboxInput(session, "do_clr_supp", value = FALSE)
         updateCheckboxInput(session, "do_log_supp", value = FALSE)
         updateCheckboxInput(session, "do_scale_supp", value = FALSE)
         showNotification("Preprocessing undone. Original uploaded data restored.", type = "message")

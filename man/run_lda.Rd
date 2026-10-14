@@ -4,11 +4,32 @@
 \alias{run_lda}
 \title{Run LDA}
 \usage{
-run_lda(x_active, x_supp, y_group, flip_cols, roles, idv = NULL)
+run_lda(x_active, x_supp, y_group, flip_cols, idv = NULL)
+}
+\arguments{
+\item{x_active}{data frame with active variables observations}
+
+\item{x_supp}{data frame with supplementary variables observations}
+
+\item{y_group}{data frame with the grouping variable labels}
+
+\item{flip_cols}{vector of logical values indicating whether the sign of the
+respective LD column needs to be flipped}
+
+\item{idv}{dataset name (if multiple datasets are analyzed)}
 }
 \description{
-compute LDA results
+Compute LDA results.
+The procedure utilizes \code{\link[MASS]{lda}} from \code{MASS} package.
 }
 \examples{
-run_lda(pca_result)
+data('witow', package = 'pebbler')
+dat <- witow
+roles <- list(active = c('a', 'b', 'c', 'mass'),
+              group = 'lithotype',
+              supp = 'hgt_min')
+run_lda(x_active = scale(dat[roles$active]),
+        x_supp = dat[roles$supp],
+        y_group = dat[roles$group],
+        flip_cols = rep(FALSE, length(roles$active)))
 }

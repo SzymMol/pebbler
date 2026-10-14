@@ -12,9 +12,12 @@ make_ord_result <- function(dat, roles, has_id, id_col, compare_mode,
   }
 
   if (method == "pca") {
-    one <- run_pca(x_active = dat[roles$active], x_supp = dat[roles$supp],
+    one <- run_pca(x_active = dat[roles$active],
+                   x_supp = dat[roles$supp],
                    y_group = dat[roles$group],
-                   flip_cols = flip_axs_vals[1, ], roles = roles)
+                   flip_cols = flip_axs_vals[1, ]#,
+                   # roles = roles
+                   )
     list(
       scores = one$scores,
       eig_vectors = one$eig_vects,
@@ -29,9 +32,12 @@ make_ord_result <- function(dat, roles, has_id, id_col, compare_mode,
     #   df_sub = dat, idv = "all", method = method,
     #   flip1 = flip_axs_vals[1, 1], flip2 = flip_axs_vals[1, 2], roles = roles
     # )
-    one <- run_lda(x_active = dat[roles$active], x_supp = dat[roles$supp],
+    one <- run_lda(x_active = dat[roles$active],
+                   x_supp = dat[roles$supp],
                    y_group = dat[roles$group],
-                   flip_cols = flip_axs_vals[1, ], roles = roles)
+                   flip_cols = flip_axs_vals[1, ] #,
+                   # roles = roles
+                   )
     # list(
     #   fit = one$fit,
     #   scores = one$scores,

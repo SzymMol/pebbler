@@ -4,9 +4,12 @@
 #'
 #' @export
 #' @examples
-#' run_pebbler()
+#' if (interactive()) {
+#'   run_pebbler()
+#' }
 #' @importFrom shiny runApp
 
 run_pebbler <- function() {
-  runApp("inst/shiny/pebbler_app.R")
+  runApp(system.file("shiny", package = "pebbler")) # for user, devtools::load_all() changes for development mode
+  # runApp("inst/shiny/app.R") # for development
 }
