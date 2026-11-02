@@ -1,3 +1,4 @@
+# LDA result export server
 lda_num_result_export_server <- function(id, in_split_mode, lda_result) {
   moduleServer(
     id,
@@ -45,8 +46,7 @@ lda_num_result_export_server <- function(id, in_split_mode, lda_result) {
         content = function(file) {
           req(lda_result())
           write_csv(
-            lda_result()$axis_pct, # %>%
-              # rename(`explained variance %` = explained_var_pct, `broken-stick %` = broken_stick_pct),
+            lda_result()$axis_pct,
             file
           )
         }
@@ -140,11 +140,6 @@ lda_num_result_export_server <- function(id, in_split_mode, lda_result) {
         else {
           var_name <- s$original_var[1]
           interpret_tag <-
-            # tags$details(
-              # tags$summary(
-              #   style = "cursor:pointer; font-weight:bold;",
-              #   "Show interpretation (click)"
-              # ),
               tags$h5(paste0("Interpretation examples: ",
                              'variable "',
                              var_name,
@@ -156,11 +151,9 @@ lda_num_result_export_server <- function(id, in_split_mode, lda_result) {
                              corr_type(s[1, lda_result()$axis_pct$LD[2]]),
                              " correlated with ",
                              lda_result()$axis_pct$LD[2], "."))
-              # )
         }
         tagList(
           downloadButton(ns("download_supp_vects_tbl"), "Export supplementary variables vectors table"),
-          # tags$p("\n"),
           interpret_tag
         )
       })
@@ -206,78 +199,6 @@ lda_num_result_export_server <- function(id, in_split_mode, lda_result) {
           )
         }
       )
-
-      # output$loadings_tbl <- renderDT({
-      #   req(pca_result())
-      #   datatable(
-      #     pca_result()$loadings %>%
-      #       rename(`original variable` = original_var)
-      #   )
-      # })
-      #
-      # output$loadings_interpret <- renderUI({
-      #   req(pca_result())
-      #   # cov(dat$mass, out$scores_std$PC1)
-      #
-      #   interpret_tag <- tags$h5(
-      #     paste0("Interpretation examples: PCA loadings estimate the covariance
-      #             between original variables and standardized PCA scores.
-      #             The length of a loading vector approximates the standard deviation
-      #             of the respective variable.
-      #             The cosine of the angle between two loading vectors
-      #             (or between a loading vector and an axis) approximates correlation
-      #             coefficient between the respective quantities.",
-      #            ifelse("dataset_id" %in% colnames(pca_result()$scores),
-      #                   " Results were obtained separately for each dataset.", "")))
-      #   tagList(
-      #     downloadButton(ns("download_loadings_tbl"), "Export loadings table"),
-      #     interpret_tag
-      #   )
-      # })
-      #
-      # output$download_loadings_tbl <- downloadHandler(
-      #   filename = function() "pca_loadings_table.csv",
-      #   content = function(file) {
-      #     req(pca_result())
-      #     write_csv(
-      #       pca_result()$loadings,
-      #       file
-      #     )
-      #   }
-      # )
-      #
-      # output$scores_std_tbl <- renderDT({
-      #   req(pca_result())
-      #   datatable(
-      #     pca_result()$scores_std
-      #   )
-      # })
-      #
-      # output$scores_std_interpret <- renderUI({
-      #   req(pca_result())
-      #   interpret_tag <- tags$h5(
-      #     paste0("Interpretation examples: PCA standardized scores represent
-      #            positions of data points in the principal axes frame of reference
-      #            normalized to unit variance.",
-      #            ifelse("dataset_id" %in% colnames(pca_result()$scores),
-      #                   " Results were obtained separately for each dataset.", "")))
-      #   tagList(
-      #     downloadButton(ns("download_scores_std_tbl"), "Export standardized scores table"),
-      #     interpret_tag
-      #   )
-      # })
-      #
-      # output$download_scores_std_tbl <- downloadHandler(
-      #   filename = function() "pca_scores_std_table.csv",
-      #   content = function(file) {
-      #     req(pca_result())
-      #     write_csv(
-      #       pca_result()$scores_std,
-      #       file
-      #     )
-      #   }
-      # )
-
     }
   )
 }

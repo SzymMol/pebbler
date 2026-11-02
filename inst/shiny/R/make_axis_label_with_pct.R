@@ -1,3 +1,4 @@
+# PCA and LDA format axis label
 make_axis_label_with_pct <- function(axis_prefix, axis_index, pct_df = NULL, split_mode = FALSE,
                                      facet_by_id = FALSE, digits = 1) {
   base_lab <- paste0(axis_prefix, axis_index)
@@ -35,3 +36,8 @@ make_axis_label_with_pct <- function(axis_prefix, axis_index, pct_df = NULL, spl
   )
   paste0(base_lab, " (", detail, ")")
 }
+
+format_axis_pct_value <- function(x, digits = 1) {
+  ifelse(is.na(x), "NA", paste0(formatC(x, format = "f", digits = digits), "%"))
+}
+

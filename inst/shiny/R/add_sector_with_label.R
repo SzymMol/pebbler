@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot angle sector
 add_sector_with_label <- function(pl, metrics, source_id = NULL) {
   if (is.null(metrics)) return(pl)
 

@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot centroid displacements
 compute_centroid_displacements <- function(centroids_df, ref_uid) {
   if (is.null(ref_uid) || !nzchar(ref_uid) || is.null(centroids_df) || nrow(centroids_df) == 0) return(data.frame())
   ref <- centroids_df %>% filter(uid == ref_uid) %>% slice(1)

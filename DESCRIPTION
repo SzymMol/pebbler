@@ -16,7 +16,7 @@ Authors@R: c(
       comment = c(ORCID = "0000-0002-7260-5979")
     )
   )
-Description: 'pebbler' is a graphical R/Shiny workflow to perform multivariate 
+Description: A graphical R/Shiny workflow to perform multivariate 
     statistical analysis. It is optimized for geoscience applications, e.g., 
     sediment grains morphometry, geochemistry, particle size distributions, etc.
     'pebbler' supports compositional data preprocessing, 

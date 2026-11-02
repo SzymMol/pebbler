@@ -1,3 +1,4 @@
+# main tab: preprocessing ui
 preprocessing_ui <- function(id) {
   ns <- NS(id)
   tabPanel(

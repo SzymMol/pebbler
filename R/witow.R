@@ -12,11 +12,11 @@
 #'    the entire section bottom (in meters).}
 #'   \item{hgt_max}{Stratigraphic height at a sampled horizon top measured from
 #'    the entire section bottom (in meters).}
-#'   \item{a}{Grain "length", i.e., the longest dimension (in milimeters).}
+#'   \item{a}{Grain "length", i.e., the longest dimension (in millimeters).}
 #'   \item{b}{Grain "width", i.e., the longest dimension perpendicular to
-#'    a (in milimeters).}
+#'    a (in millimeters).}
 #'   \item{c}{Grain "thickness", i.e., the longest dimension perpendicular to
-#'    both a and b (in milimeters).}
+#'    both a and b (in millimeters).}
 #'   \item{mass}{Grain mass (in grams).}
 #'   \item{lithotype}{Grain lithotype identifier.
 #'    Abbreviations:

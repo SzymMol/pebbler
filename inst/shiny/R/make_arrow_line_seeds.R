@@ -1,3 +1,4 @@
+# PCA and LDA make arrows
 make_arrow_line_seeds <- function(xend, yend, n_per_arrow = 12) {
   if (length(xend) == 0) return(data.frame(x = numeric(), y = numeric()))
   fracs <- seq(0.10, 0.98, length.out = n_per_arrow)

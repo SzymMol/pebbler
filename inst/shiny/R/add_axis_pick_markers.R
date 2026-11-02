@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot pick markers
 add_axis_pick_markers <- function(pl, xlab_plain, ylab_plain, source_id) {
   ax <- get_virtual_axis_df(xlab_plain, ylab_plain)
 

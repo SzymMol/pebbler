@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot centroids
 get_plotly_centroids <- function(projected, group_colname, show_centroids, flip_x = FALSE, flip_y = FALSE) {
   if (is.null(group_colname) || !isTRUE(show_centroids)) return(data.frame())
   sc <- projected$scores

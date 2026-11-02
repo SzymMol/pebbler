@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot centroids format
 add_plotly_centroid_traces <- function(pl, centroids_df, source_id, group_colors = NULL, id_shapes = NULL, ref_uid = NULL, hover_uid = NULL, base_size = 13) {
   if (is.null(centroids_df) || nrow(centroids_df) == 0) return(pl)
   pair_metrics <- compute_centroid_pair_metrics(centroids_df, ref_uid, hover_uid)
@@ -55,7 +56,6 @@ add_plotly_centroid_traces <- function(pl, centroids_df, source_id, group_colors
       hoverinfo = "text",
       showlegend = FALSE,
       inherit = FALSE
-      # source = source_id
     )
 
     if (outline_group) {
@@ -74,7 +74,6 @@ add_plotly_centroid_traces <- function(pl, centroids_df, source_id, group_colors
         hoverinfo = "skip",
         showlegend = FALSE,
         inherit = FALSE
-        # source = source_id
       )
     }
   }

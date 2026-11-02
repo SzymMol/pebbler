@@ -1,3 +1,4 @@
+# PCA and LDA get plot configuration
 get_ord_cfg <- function(input, prefix) {
   list(
     show_points = isTRUE(input[[paste0(prefix, "_show_points")]]),

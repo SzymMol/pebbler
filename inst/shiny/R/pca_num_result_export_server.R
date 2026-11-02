@@ -1,3 +1,4 @@
+# PCA result export server
 pca_num_result_export_server <- function(id, in_split_mode, pca_result) {
   moduleServer(
     id,
@@ -43,8 +44,7 @@ pca_num_result_export_server <- function(id, in_split_mode, pca_result) {
         content = function(file) {
           req(pca_result())
           write_csv(
-            pca_result()$eigen, # %>%
-              # rename(`explained variance %` = explained_var_pct, `broken-stick %` = broken_stick_pct),
+            pca_result()$eigen,
             file
           )
         }
@@ -137,11 +137,6 @@ pca_num_result_export_server <- function(id, in_split_mode, pca_result) {
         else {
           var_name <- s$original_var[1]
           interpret_tag <-
-            # tags$details(
-              # tags$summary(
-              #   style = "cursor:pointer; font-weight:bold;",
-              #   "Show interpretation (click)"
-              # ),
               tags$h5(paste0("Interpretation examples: ",
                              'variable "',
                              var_name,
@@ -153,11 +148,9 @@ pca_num_result_export_server <- function(id, in_split_mode, pca_result) {
                              corr_type(s[1, pca_result()$eigen$PC[2]]),
                              " correlated with ",
                              pca_result()$eigen$PC[2], "."))
-              # )
         }
         tagList(
           downloadButton(ns("download_supp_vects_tbl"), "Export supplementary variables vectors table"),
-          # tags$p("\n"),
           interpret_tag
         )
       })
@@ -214,8 +207,6 @@ pca_num_result_export_server <- function(id, in_split_mode, pca_result) {
 
       output$loadings_interpret <- renderUI({
         req(pca_result())
-        # cov(dat$mass, out$scores_std$PC1)
-
         interpret_tag <- tags$h5(
           paste0("Interpretation examples: PCA loadings estimate the covariance
                   between original variables and standardized PCA scores.

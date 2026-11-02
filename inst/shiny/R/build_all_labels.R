@@ -1,3 +1,4 @@
+# PCA and LDA build labels
 build_all_labels <- function(av = NULL, sv = NULL, cents = NULL,
                              show_centroid_labels = TRUE,
                              show_vector_labels = TRUE,

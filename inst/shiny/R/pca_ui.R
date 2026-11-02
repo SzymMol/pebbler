@@ -1,19 +1,13 @@
+# main tab: PCA ui
 pca_ui <- function(id) {
   ns <- NS(id)
   tabPanel(
     "PCA", br(),
     uiOutput(ns("pca_ord_top")),
     hr(), uiOutput(ns("pca_comparison_heading")),
-    # fluidRow(column(4, uiOutput(ns("pca_align_mode_ui"))),
-    #          column(4, uiOutput(ns("pca_ref_id_ui"))),
-    #          column(4, uiOutput(ns("pca_facet_ui")))),
     hr(), h4("PCA ordination"),
     uiOutput(ns("axes_controls")),
     uiOutput(ns("pca_plot_container")),
-    # fluidRow(
-      # column(6, htmlOutput(ns("pca_vector_note"))),
-    #   column(6, div(style = "padding-top: 2px;", uiOutput(ns("pca_angle_controls")), uiOutput(ns("pca_centroid_controls"))))
-    # ),
     hr(),
     fluidRow(
       column(3, checkboxInput(ns("pca_show_points"), "Show points (PCA scores)", FALSE)),

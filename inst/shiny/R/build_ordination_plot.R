@@ -1,3 +1,4 @@
+# PCA and LDA biplot
 build_ordination_plot <- function(sc, hulls, cents, av, sv, group_colname,
                                   multi_id, cfg,
                                   interactive = FALSE) {
@@ -9,7 +10,6 @@ build_ordination_plot <- function(sc, hulls, cents, av, sv, group_colname,
     if (sv_present && !is.null(sv) && nrow(sv) > 0) sv <- add_id_suffix_to_vec_labels(sv, "dataset_id", "original_var")
   }
 
-  # group_present <- "group" %in% names(sc) && nrow(sc) > 0
   group_present <- !is.null(group_colname)
   p <- ggplot()
 

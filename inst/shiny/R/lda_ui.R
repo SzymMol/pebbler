@@ -1,19 +1,13 @@
+# main tab: LDA ui
 lda_ui <- function(id) {
   ns <- NS(id)
   tabPanel(
     "LDA", br(),
     uiOutput(ns("lda_ord_top")),
     hr(), uiOutput(ns("lda_comparison_heading")),
-    # fluidRow(column(4, uiOutput(ns("pca_align_mode_ui"))),
-    #          column(4, uiOutput(ns("pca_ref_id_ui"))),
-    #          column(4, uiOutput(ns("pca_facet_ui")))),
     hr(), h4("LDA ordination"),
     uiOutput(ns("axes_controls")),
     uiOutput(ns("lda_plot_container")),
-        # fluidRow(
-      # column(6, htmlOutput(ns("pca_vector_note"))),
-    #   column(6, div(style = "padding-top: 2px;", uiOutput(ns("pca_angle_controls")), uiOutput(ns("pca_centroid_controls"))))
-    # ),
     hr(),
     fluidRow(
       column(3, checkboxInput(ns("lda_show_points"), "Show points (LDA scores)", FALSE)),
@@ -40,9 +34,6 @@ lda_ui <- function(id) {
       column(3, sliderInput(ns("lda_vec_scale_supp"), "Supplementary variable vectors scale", 0.1, 100, 1, 0.1)),
       column(3, checkboxInput(ns("lda_lock_vec_scale"), "Lock vector scaling", FALSE))
     ),
-    # hr(), verbatimTextOutput("lda_info"), DTOutput("lda_tbl"),
-
-    # hr(), h4("Scree plot"), uiOutput(ns("scree_plot")),
     lda_num_result_export_ui(ns("lda_num_result_export"))
     )
 }

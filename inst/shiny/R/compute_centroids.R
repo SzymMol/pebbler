@@ -1,3 +1,4 @@
+# PCA and LDA compute centroids position on a biplot
 compute_centroids <- function(scores_df, group_col, x_col, y_col, id_col = NULL) {
   if (is.null(group_col) || !(group_col %in% names(scores_df))) {
     if (is.null(id_col)) {

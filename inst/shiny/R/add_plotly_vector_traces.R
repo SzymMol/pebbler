@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot vectors
 add_plotly_vector_traces <- function(pl, vectors_df, source_id, ref_uid = NULL, hover_uid = NULL,
                                      xlab_plain = NULL, ylab_plain = NULL) {
   if (is.null(vectors_df) || nrow(vectors_df) == 0) return(pl)

@@ -1,3 +1,4 @@
+# PCA and LDA interactive mode print labels
 replace_repel_with_text <- function(p, repel_layer_index, all_lab, label_size_pt) {
   if (is.na(repel_layer_index) || repel_layer_index > length(p$layers)) return(p)
 

@@ -1,3 +1,4 @@
+# PCA and LDA sync active and supplementary vectors scale
 register_vec_lock_sync <- function(input, session, rv, prefix, flag_name) {
   lock_id <- paste0(prefix, "_lock_vec_scale")
   active_id <- paste0(prefix, "_vec_scale_active")

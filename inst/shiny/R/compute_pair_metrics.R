@@ -1,3 +1,4 @@
+# PCA and LDA compute measurements in interactive mode
 compute_pair_metrics <- function(all_df, ref_uid, hov_uid) {
   if (is.null(ref_uid) || is.null(hov_uid) || !nzchar(ref_uid) || !nzchar(hov_uid)) return(NULL)
   r <- all_df %>% filter(uid == ref_uid) %>% slice(1)

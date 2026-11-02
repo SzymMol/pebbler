@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot extract legend
 extract_legend_info <- function(p, scores_df, group_colname, multi_id) {
   FILLABLE_SHAPES <- c(21, 22, 23, 24, 25)
 

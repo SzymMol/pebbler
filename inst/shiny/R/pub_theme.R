@@ -1,3 +1,4 @@
+# PCA and LDA plot style details
 pub_theme <- function(base_size = 18, axis_font_size = AXIS_FONT_SIZE) {
   theme_minimal(base_size = base_size) +
     theme(

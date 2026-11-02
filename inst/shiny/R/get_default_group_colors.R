@@ -1,3 +1,4 @@
+# PCA and LDA get colors
 get_default_group_colors <- function(group_levels) {
   n <- length(group_levels)
   if (n == 0) return(character(0))

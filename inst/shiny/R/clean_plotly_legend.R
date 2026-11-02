@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot clean legend
 clean_plotly_legend <- function(pl, group_colname = "Lithotype", id_colname = "ID",
                                 litho_levels = NULL, litho_colors = NULL,
                                 id_levels = NULL, id_shapes = NULL, is_faceted = FALSE) {

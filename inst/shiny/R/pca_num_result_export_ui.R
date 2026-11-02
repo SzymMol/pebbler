@@ -1,3 +1,4 @@
+# PCA result export ui
 pca_num_result_export_ui <- function(id) {
   ns <- NS(id)
   tagList(

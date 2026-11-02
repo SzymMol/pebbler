@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot add dataset labels
 add_id_suffix_to_vec_labels <- function(df, id_col = "dataset_id", var_col = "var") {
   if (is.null(df) || nrow(df) == 0) return(df)
   if (!(id_col %in% names(df)) || !(var_col %in% names(df))) return(df)

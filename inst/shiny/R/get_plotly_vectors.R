@@ -1,3 +1,4 @@
+# PCA and LDA interactive biplot vectors
 get_plotly_vectors <- function(projected, cfg, multi_id, include_id_suffix = FALSE) {
   vv <- projected$vectors
   if (is.null(vv) || nrow(vv) == 0) return(data.frame())

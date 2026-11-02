@@ -1,3 +1,4 @@
+# PCA and LDA: run ordination for split datasets
 run_split_ordination <- function(dat, id_col, method, flip_axs_vals, roles) {
   ids <- unique(as.character(dat[[id_col]]))
   parts <- lapply(ids, function(idv) {
@@ -9,7 +10,6 @@ run_split_ordination <- function(dat, id_col, method, flip_axs_vals, roles) {
         y_group = dat_split[roles$group],
         idv = idv,
         flip_cols = flip_axs_vals[idv, ]
-        # roles = roles
       )
     }
     else {
@@ -19,11 +19,10 @@ run_split_ordination <- function(dat, id_col, method, flip_axs_vals, roles) {
         y_group = dat_split[roles$group],
         idv = idv,
         flip_cols = flip_axs_vals[idv, ]
-        # roles = roles
       )
     }
   })
-
+  # format output
   if (method == "pca") {
     scores <- bind_rows(lapply(parts, `[[`, "scores"))
     eig_vects <- bind_rows(lapply(parts, `[[`, "eig_vects"))

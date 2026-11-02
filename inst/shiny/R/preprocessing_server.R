@@ -1,3 +1,4 @@
+# main tab: preprocessing server
 preprocessing_server <- function(id, rv) {
   moduleServer(
     id,
@@ -9,10 +10,6 @@ preprocessing_server <- function(id, rv) {
       output$prep_cols_ui_act <- renderUI({
         # select active columns for preprocessing
         req(roles_ready())
-        # req(filtered_data(), roles_ready())
-        # ch <- setdiff(rv$roles$active %||% character(0), rv$roles$supp %||% character(0))
-        # ch <- ch[ch %in% names(filtered_data())[sapply(filtered_data(), is.numeric)]]
-        # validate(need(length(ch) > 0, "No eligible active numeric variables."))
         selectizeInput(ns("prep_cols_act"), "Active columns to preprocess",
                        choices = rv$roles$active,
                        selected = rv$roles$active,
@@ -22,10 +19,6 @@ preprocessing_server <- function(id, rv) {
       output$prep_cols_ui_supp <- renderUI({
         # select passive columns for preprocessing
         req(roles_ready())
-        # req(filtered_data(), roles_ready())
-        # ch <- setdiff(rv$roles$active %||% character(0), rv$roles$supp %||% character(0))
-        # ch <- ch[ch %in% names(filtered_data())[sapply(filtered_data(), is.numeric)]]
-        # validate(need(length(ch) > 0, "No eligible active numeric variables."))
         selectizeInput(ns("prep_cols_supp"), "Passive/supplementary columns to preprocess",
                        choices = rv$roles$supp,
                        multiple = TRUE)
@@ -34,9 +27,6 @@ preprocessing_server <- function(id, rv) {
       observeEvent(input$apply_prep, {
         # apply preprocessing functions for selected columns
         req(rv$filtered_data, roles_ready())
-
-        # active_numeric <- setdiff(rv$roles$active %||% character(0), rv$roles$supp %||% character(0))
-        # active_numeric <- active_numeric[active_numeric %in% names(rv$data)[sapply(rv$data, is.numeric)]]
 
         if (length(input$prep_cols_act) == 0 && length(input$prep_cols_supp) == 0) {
           showNotification("No preprocessing applied. No columns selected.", type = "message")
@@ -77,7 +67,7 @@ preprocessing_server <- function(id, rv) {
         }
 
         rv$data <- dat
-        # prep log changed to only last action (preprocessing is not sequential) ?
+        # prep log changed to only last action (preprocessing is not sequential)
         rv$prep_log <- list(list(
           time = as.character(Sys.time()),
           cols_act = input$prep_cols_act,
@@ -140,8 +130,6 @@ preprocessing_server <- function(id, rv) {
         # undo preprocessing
         req(rv$filtered_data)
         rv$data <- NULL
-        # rv$data <- rv$filtered_data
-        # rv$id_col <- detect_id_col(names(rv$raw_data))
         rv$prep_log <- list()
         updateCheckboxInput(session, "do_clr_act", value = FALSE)
         updateCheckboxInput(session, "do_log_act", value = FALSE)
@@ -164,22 +152,13 @@ preprocessing_server <- function(id, rv) {
       get_inspect_long <- reactive({
         # get data for preprocessing plots
         req(rv$filtered_data, roles_ready())
-        # print(rv$filtered_data)
         if (is.null(rv$data)) {
           dat <- rv$filtered_data
         }
         else {
           dat <- rv$data
         }
-        # ic <- setdiff(rv$roles$active %||% character(0), rv$roles$supp %||% character(0))
-        # ic <- ic[ic %in% names(dat)[sapply(dat, is.numeric)]]
-        # validate(need(length(ic) > 0, "No numeric active variables selected."))
         ic <- append(rv$roles$active, rv$roles$supp)
-        # iv <- if (!is.null(rv$id_col)) as.factor(dat[[rv$id_col]]) else as.factor("all")
-        # dat %>%
-        #   mutate(.row_id = row_number()) %>%
-        #   select(.data[[rv$id_col]], .row_id, all_of(ic)) %>%
-        #   pivot_longer(cols = all_of(ic), names_to = "variable", values_to = "value")
         dat <- dat %>% mutate(.row_id = row_number())
         if (!is.null(rv$cmp_mode) && rv$cmp_mode == 'split') {
           dat <- dat %>% select(all_of(rv$id_col), .row_id, all_of(ic))

@@ -1,20 +1,14 @@
-build_axis_pct_labels <- function(res, method = c("pca", "lda"), pair_x = 1, pair_y = 2, #pair = "1_2",
+# PCA and LDA make axis label for biplot
+build_axis_pct_labels <- function(res, method = c("pca", "lda"), pair_x = 1, pair_y = 2,
                                   facet_by_id = FALSE, digits = 1) {
   method <- match.arg(method)
-  # ij <- parse_axes_pair(pair)
-  # i <- ij[1]
-  # j <- ij[2]
   i <- pair_x
   j <- pair_y
 
   if (method == "pca") {
-    # pct_df <- axis_percent_from_pca_eigen(res$eigen)
-    # prefix <- "PC"
     pct_df <- res$eigen %>%
               mutate(pct = explained_var_pct, axis_index = PC)
   } else {
-    # pct_df <- res$axis_pct %||% data.frame()
-    # prefix <- "LD"
     pct_df <- res$axis_pct %>%
               mutate(axis_index = LD)
   }

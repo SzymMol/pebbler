@@ -1,3 +1,4 @@
+# PCA and LDA interactive plot get colors
 get_ggplot_fill_colors <- function(p) {
   tryCatch({
     gb <- ggplot_build(p)

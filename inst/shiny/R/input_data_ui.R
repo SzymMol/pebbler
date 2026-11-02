@@ -1,3 +1,4 @@
+# main tab: input data ui
 input_data_ui <- function(id) {
   ns <- NS(id)
   tabPanel(

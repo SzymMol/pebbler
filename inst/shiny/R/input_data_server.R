@@ -1,3 +1,4 @@
+# main tab: input data server
 input_data_server <- function(id, rv) {
   moduleServer(
     id,
@@ -8,11 +9,9 @@ input_data_server <- function(id, rv) {
         req(input$file)
         dat <- read_csv(input$file$datapath, show_col_types = FALSE)
         rv$raw_data <- dat
-        # rv$data <- dat
         rv$roles_applied <- FALSE
         rv$roles_update_pca <- FALSE
         rv$roles_update_lda <- FALSE
-        # rv$prep_log <- list()
       })
       output$active_ui <- renderUI({
         # select active variables
