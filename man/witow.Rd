@@ -3,7 +3,7 @@
 \docType{data}
 \name{witow}
 \alias{witow}
-\title{Pebble morphometry measurements from Witów site}
+\title{Pebble morphometry measurements from Witów site (southern Poland)}
 \format{
 A data frame with 1432 rows and 7 columns:
 \describe{
@@ -11,7 +11,7 @@ A data frame with 1432 rows and 7 columns:
    the entire section bottom (in meters).}
   \item{hgt_max}{Stratigraphic height at a sampled horizon top measured from
    the entire section bottom (in meters).}
-  \item{a}{Grain "length", i.e., the longest dimension (in milimeters)}
+  \item{a}{Grain "length", i.e., the longest dimension (in milimeters).}
   \item{b}{Grain "width", i.e., the longest dimension perpendicular to
    a (in milimeters).}
   \item{c}{Grain "thickness", i.e., the longest dimension perpendicular to
@@ -31,7 +31,7 @@ A data frame with 1432 rows and 7 columns:
 }
 }
 \source{
-TO DO zenodo
+\doi{doi:10.5281/zenodo.23438681}
 }
 \usage{
 witow
@@ -39,7 +39,7 @@ witow
 \description{
 A dataset containing 3D morphometric measurements of pebble grains
 (with diameter >= 8 mm) from a 4.4-m-high section of the Witów Series
-gravel deposits in the Witów Quarry (Southern Poland).
+gravel deposits in the Witów Quarry (southern Poland).
 For details of geological setting, sampling and measurement methods,
 refer to \doi{doi:10.14241/asgp.2024.11}.
 }

@@ -37,4 +37,9 @@ run_pebbler() # opens pebbler app
 TO DO
 
 ## Citation
-TO DO
+If you use 'pebbler' for scientific research, please cite our works. 
+You can view the preferred bibliographic source using R console:
+
+``` r
+citation('pebbler') # displays pebbler citation information
+```

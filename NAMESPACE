@@ -8,9 +8,13 @@ import(dplyr)
 import(ggplot2)
 importFrom(MASS,lda)
 importFrom(rlang,.data)
-importFrom(shiny,need)
-importFrom(shiny,runApp)
-importFrom(shiny,validate)
-importFrom(stats,cor)
-importFrom(stats,prcomp)
-importFrom(stats,predict)
+importFrom(shiny,
+  need,
+  runApp,
+  validate
+)
+importFrom(stats,
+  cor,
+  prcomp,
+  predict
+)
